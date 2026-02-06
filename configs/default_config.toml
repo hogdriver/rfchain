@@ -1,0 +1,61 @@
+# RF Chain Framework Configuration
+# Default configuration for anti-jamming simulation
+
+[source]
+signal_type = "qpsk"
+sample_rate = 1000000.0
+carrier_freq = 2400000000.0
+symbol_rate = 100000.0
+num_symbols = 10000
+power_dbm = 0.0
+
+[pulse_shaping]
+filter_type = "rrc"
+span = 10
+sps = 8
+beta = 0.35
+
+[fec]
+code_type = "none"  # Options: none, reed_solomon, convolutional, ldpc, turbo
+code_rate = 0.5
+interleaver = true
+interleaver_depth = 10
+
+[channel]
+fading_type = "awgn"  # Options: awgn, rayleigh, rician, nakagami, flat, frequency_selective
+doppler_freq = 100.0
+path_delays = [0.0, 1e-6, 2e-6]
+path_gains = [0.0, -3.0, -6.0]
+awgn_enabled = true
+snr_db = 20.0
+
+[jamming]
+jammer_type = "barrage"  # Options: none, barrage, spot, swept, pulsed, follower, partial_band, tone
+jammer_power_dbm = 10.0
+jammer_bandwidth = 5000000.0
+jnr_db = 10.0
+sweep_rate = 1000000.0
+hop_period = 0.001
+
+[antenna]
+antenna_type = "omnidirectional"  # Options: omnidirectional, directional, patch, dipole
+num_elements = 1
+element_spacing = 0.5
+gain_dbi = 0.0
+beamforming_enabled = false
+steering_angle = 0.0
+
+[receiver]
+noise_figure_db = 5.0
+sync_method = "pll"  # Options: none, pll, costas, early_late
+equalizer_type = "lms"  # Options: none, lms, rls, cma, zero_forcing
+equalizer_taps = 11
+equalizer_step_size = 0.01
+
+[validation]
+calculate_ber = true
+calculate_per = true
+calculate_sinr = true
+calculate_evm = true
+save_constellation = true
+save_spectrum = true
